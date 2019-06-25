@@ -1,0 +1,9 @@
+{%extends 'base.html'%}
+{% block navbar %}
+    {% include '_navbar_public.html'%}
+{% endblock %}
+{%block app_content%}
+    <h1>Beklenmeyen bir hata oluştu!</h1>
+    <span>Yönetici bilgilendirildi, en kısa sürede ilgileneceğiz.</span>
+    <a href="{{url_for('home.index')}}">Anasayfa</a>
+{%endblock%}

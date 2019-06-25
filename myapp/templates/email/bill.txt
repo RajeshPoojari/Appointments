@@ -1,0 +1,4 @@
+Değerli müşterimiz faturanız.
+Randevu başlangıç zamanı: {{booking.start_time}}
+Randevu bitiş zamanı: {{booking.end_time}}
+Tutar U+020BA : {{booking.total_price}}

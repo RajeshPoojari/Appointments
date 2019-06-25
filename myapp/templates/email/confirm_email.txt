@@ -1,0 +1,7 @@
+Değerli {{client.full_name() }},
+Randevu işlemini tamamlamak için email adresinizi doğrulamanız gerekiyor.
+Lütfen aşağıdaki linke tıklayarak email adresinizi doğrulayınız:
+{{url_for('home.confirm_email', token=token, _external=True )}}
+Eğer randevu talebi yapmadıysanız lütfen bu maili önemsemeyin.
+Saygılarımızla,
+Info CE Bilişim LTD

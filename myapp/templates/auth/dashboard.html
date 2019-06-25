@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+
+{% block app_content %}
+    
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>Müşteri</th>
+                    <th>Başlangıç Tarihi</th>
+                    <th>Bitiş Tarihi</th>
+                    <th>Personel</th>
+                    <th>Toplam Tutar</th>
+                    <th>Randevu Alınma Tarihi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if bookings %}
+                    {% for booking in bookings %}
+                        <tr>
+                            <td>{{booking.id}}</td>
+                            <td>{{booking.client.full_name()}}</td>
+                            <td>{{booking.start_time.strftime("%d-%m-%Y %H:%M")}}</td>
+                            <td>{{booking.end_time.strftime("%d-%m-%Y %H:%M")}}</td>
+                            <td>{{booking.employee.full_name()}}</td>
+                            <td>{{booking.total_price}} &#8378;</td>
+                            <td>{{booking.booked_datetime.strftime("%d-%m-%Y %H:%M")}}</td>
+                        </tr>
+                    {% endfor %}
+                {% else%}
+                    <tr>Randevu yok!</tr>
+                {% endif%}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock%}

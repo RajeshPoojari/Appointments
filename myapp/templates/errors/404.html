@@ -1,0 +1,12 @@
+{%extends 'base.html'%} 
+{% block navbar %} 
+{% include '_navbar_public.html'%} 
+{% endblock %} 
+{%block app_content%}
+<div class="col-md-4">
+    <div class="alert alert-danger">
+        <h1>File not found!</h1>
+        <a class="btn btn-danger" href="{{url_for('home.index')}}">Anasayfa</a>
+    </div>
+</div>
+{%endblock%}

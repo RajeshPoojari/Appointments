@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+{% import 'bootstrap/wtf.html' as wtf%} 
+{% block app_content %}
+    <div class="row">
+        <div class="col-md-6">
+            {{ wtf.quick_form(form, button_map={'submit':'primary'})   }}
+        </div>
+        <div class="col-md-6">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Servis Adı</th>
+                        <th>Ücreti (TL)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if services %}
+                    {% for service in services%}
+                        <tr>
+                            <td>
+                                {{service.name}}
+                            </td>
+                            <td>
+                                {{service.price}}
+                            </td>
+                        </tr>
+                    {% endfor%}
+                {% else %}
+                <tr>
+                    <td>Servis Eklenmemiş!</td>
+                    <td> 0 TL </td>
+                </tr>
+                {% endif%}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+{% endblock%}

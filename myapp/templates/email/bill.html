@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fatura</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th {
+            background: rgb(34, 204, 216);
+
+        }
+
+        th,
+        td {
+            border: 1px solid rgb(58, 225, 161);
+            padding: 8px;
+            width: 200px;
+            height: 60px;
+        }
+
+        tr:nth-child(even) {
+            background: #efefef;
+        }
+
+        tr:hover {
+            background: #d1d1d1;
+        }
+    </style>
+</head>
+
+<body>
+    <h4>Değerli müşterimiz faturanız.</h4>
+    <table>
+        <thead>
+            <tr>
+                <th><h3>Randevu başlangıç zamanı</h3></th>
+                <th><h3>Randevu bitiş zamanı</h3></th>
+                <th><h3>Toplam tutar</h3> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></h4>{{booking.start_time}}</h4></td>
+                <td></h4>{{booking.end_time}}</h4></td>
+                <td><h4>{{booking.total_price}}&#8378;</h4>
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

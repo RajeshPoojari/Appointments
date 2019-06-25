@@ -1,0 +1,21 @@
+{% extends 'base.html' %} 
+{% import 'bootstrap/wtf.html' as wtf %} 
+
+{% block app_content%}
+<div class="row">
+    <div class="col-md-6">
+        <h3>Kayıt yapmak için formu doldurunuz.</h3>
+        <form class="form form-vertical" role="form" action="" method="POST">
+           {{ form.csrf_token() }}
+           {{wtf.form_field(form.fname, form_type='inline', placeholder='Adınız')}} 
+           {{wtf.form_field(form.lname, form_type='inline', placeholder='Soyadınız')}} 
+           {{wtf.form_field(form.email, form_type='inline', placeholder='Email adresiniz')}} 
+           {{wtf.form_field(form.username, form_type='inline', placeholder='Kullanıcı adınız')}} 
+           {{wtf.form_field(form.password, form_type='inline', placeholder='Parolanız')}} 
+           {{wtf.form_field(form.password2, form_type='inline', placeholder='Parolanızı tekrar giriniz')}} 
+            <!-- submit -->
+            {{wtf.form_field(form.submit, button_map={'submit':'primary'})}}
+        </form>
+    </div>
+</div>
+{% endblock %}

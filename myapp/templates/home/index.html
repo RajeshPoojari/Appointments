@@ -1,0 +1,153 @@
+{% extends 'base.html' %} {% import 'bootstrap/wtf.html' as wtf %} {% block head%}
+<script src="/static/js/jquery-3.2.1.min.js"></script>
+<script src="/static/js/jquery.datetimepicker.full.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Bootstrap -->
+<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/jquery.datetimepicker.min.css"> {% endblock%} 
+{% block navbar%} {% include '_navbar_public.html' %} {% endblock%} 
+{% block app_content %}
+<style>
+    .marginTop{
+        margin-top: 20px;
+    }
+</style>
+<div class="alert alert-info" role="alert">
+        <h3 class="text-center">Randevu almak için formu doldurunuz</h3>
+</div>
+<form action="" method="POST" role="form" class="form form-horizontal">
+    <!-- main div -->
+<div class="col-md-12">
+    <div class="row">
+        <!-- CSRF -->
+        {{form.hidden_tag()}}
+        <!-- form -->
+        <div class="col-md-2 ">
+            <!-- client informations -->
+            <div class="row">
+                {{wtf.form_field(form.fname, placeholder='Lütfen isminizi giriniz.')}}
+            </div>
+            <div class="row">
+                {{wtf.form_field(form.lname, placeholder='Lütfen soy isminizi giriniz.')}}
+            </div>
+            <div class="row">
+                {{wtf.form_field(form.phone, placeholder='Ör: 5554442211')}}
+            </div>
+            <div class="row">
+                {{wtf.form_field(form.email, placeholder='ornek@email.com')}}
+            </div>
+        </div>
+        <div class="col-md-1"><!-- divider--></div>
+        <div class="col-md-2 marginTop">
+            <!-- DATE -->
+            <div class="input-group">
+                <input required name="date" type="text" class="form-control" placeholder="Tarih seçiniz..." id="date">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="calendar_button">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-1"><!-- divider--></div>
+        <div class="col-md-2 marginTop">
+            <!-- TIME -->
+            <div class="input-group">
+                <input required name="time" type="text" class="form-control" placeholder="Saat seçiniz..." id="time">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="time_button">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-1"><!-- divider --></div>
+        <div class="col-md-3 marginTop">
+            <div class="row">
+                <!-- Services -->
+                <table class="table">
+                    <tr><h3>Hizmetlerimiz</h3></tr>
+                    {% if services %}
+                    <tr>
+                        {% for service in services %}
+                        <th>
+                            <span>{{service.price}} TL </span>
+                        </th>
+                        {% endfor%}
+                    </tr>
+                    <tr>
+                        {% for service in services %}
+                        <td>
+                            <label>
+                                <input type="checkbox" name='selected_services' value="{{service.id}}" /> {{service.name}}
+                            </label>
+                        </td>
+                        {% endfor%}
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+            <div class="row">
+                <!-- Employees -->
+                <div class="form-group">
+                    <label class="control-label" for="employee">Personel Seç</label>
+                    <select id="employee" name="selected_person_id" class="selectpicker form-control">
+                        {% for emp in employees %}
+                            <option value="{{ emp.id }}">{{ emp.full_name() }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="marginTop">
+
+                <!-- submit -->
+                {{wtf.form_field(form.submit, button_map={'submit':'primary'})}}
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+{% endblock %} {% block scripts %}
+<script>
+    // Specify locale as Turkey
+    jQuery.datetimepicker.setLocale('tr');
+    jQuery('#calendar_button').click(function () {
+        jQuery('#date').datetimepicker('show'); //support hide,show and destroy command
+    });
+    // Date
+    $('#date').datetimepicker({
+        /*i18n:{
+            tr:{
+                months:[
+                    'Ocak','Şubat','Mart','Nisan',
+                    'Mayıs','Haziran','Temmuz','Ağustos',
+                    'Eylül','Ekim','Kasım','Aralık',
+                ],
+                dayOfWeek:[
+                    "Pazar", "Pzt", "Salı", "Çar", 
+                    "Per", "Cuma", "Cts.",
+                ]
+            }
+            },*/
+        timepicker: false,
+        format: 'Y.m.d',
+        minDate: 0,
+        disabledWeekDays: [0],
+    });
+    // click icon button
+    jQuery('#time_button').click(function () {
+        jQuery('#time').datetimepicker('show'); //support hide,show and destroy command
+    });
+
+    // Time
+    jQuery('#time').datetimepicker({
+        datepicker: false,
+        format: 'H.i',
+        minTime: '05:00',
+        maxTime: '16:00'
+    });
+</script> {% endblock%}
