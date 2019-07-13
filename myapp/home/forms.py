@@ -11,4 +11,4 @@ class BookingForm(FlaskForm):
     lname = StringField('', validators=[DataRequired()])
     phone = StringField('', validators=[DataRequired()])
     email = StringField('', validators=[DataRequired(), Email()])
-    submit = SubmitField('Gönder')
+    submit = SubmitField('Submit')

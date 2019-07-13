@@ -20,17 +20,17 @@
         </style>
 </head>
 <body>
-        <p>Değerli {{client.full_name() }},</p>
-        <p>Randevu işlemini tamamlamak için email adresinizi doğrulamanız gerekiyor.</p>
-        </p>Lütfen aşağıdaki butona tıklayarak email adresinizi doğrulayınız:</p> <br />
+        <p>Dear {{client.full_name() }},</p>
+        <p>You need to verify your email address to complete the appointment.</p>
+        </p>Please confirm your email address by clicking the button below:</p> <br />
         <p>
             <a class="button" style="text-decoration: none;" href="{{ url_for('home.confirm_email', token=token, _external=True ) }}">
-                Email Doğrula!
+                Verify Email!
             </a>
         </p>
-        <p>Eğer randevu talebi yapmadıysanız lütfen bu maili önemsemeyin.</p>
-        <p>Saygılarımızla,</p>
-        <p>Info CE Bilişim LTD</p>
+        <p>If you have not made an appointment request, please do ignore this email.</p>
+        <p>our respect,</p>
+        <p>Info CE Information LTD</p>
 </body>
 </html>
 

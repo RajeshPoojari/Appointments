@@ -7,10 +7,10 @@ from wtforms import StringField, PasswordField, RadioField, SubmitField
 
 
 class LoginForm(FlaskForm):
-    username = StringField('Kullanıcı Adı', validators=[DataRequired()])
+    username = StringField('User name', validators=[DataRequired()])
     # email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Parola', validators=[DataRequired()])
-    submit = SubmitField('Giriş Yap')
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Sign in')
 
 
 class RegisterForm(FlaskForm):
@@ -22,10 +22,10 @@ class RegisterForm(FlaskForm):
     password2 = PasswordField('', validators=[DataRequired(),
                                               EqualTo('password')])
 
-    submit = SubmitField('Kaydol')
+    submit = SubmitField('Register')
 
 
 class ServiceForm(FlaskForm):
-    name = StringField('Servis Adı', validators=[DataRequired()])
-    price = StringField('Ücreti', validators=[DataRequired()])
-    submit = SubmitField('Kaydet', validators=[DataRequired()])
+    name = StringField('Service Name', validators=[DataRequired()])
+    price = StringField('Fare', validators=[DataRequired()])
+    submit = SubmitField('Save', validators=[DataRequired()])

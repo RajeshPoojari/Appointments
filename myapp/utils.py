@@ -46,10 +46,10 @@ def send_email(subject, sender, recipients, text_body, html_body):
 def send_confirmation_token(client):
     """ sends email with token"""
     token = generate_token(client.email)
-    subject = "Email Doğrulama"
+    subject = "Email Verification"
     send_email(
         subject,
-        sender=app.config['ADMINS'][0],
+        sender=app.config['ADMINS'],
         recipients=[client.email],
         text_body=render_template(
             'email/confirm_email.txt', token=token, client=client),
@@ -59,10 +59,10 @@ def send_confirmation_token(client):
 
 
 def send_bill_mail(client, booking):
-    subject = "Fatura"
+    subject = "Invoice"
     send_email(
         subject,
-        sender=app.config['ADMINS'][0],
+        sender=app.config['ADMINS'],
         recipients=[client.email],
         text_body=render_template('email/bill.txt', booking=booking),
         html_body=render_template('email/bill.html', booking=booking),

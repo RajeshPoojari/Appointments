@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fatura</title>
+    <title>Invoice</title>
     <style>
         table {
             border-collapse: collapse;
@@ -35,25 +35,28 @@
 </head>
 
 <body>
-    <h4>Değerli müşterimiz faturanız.</h4>
+    <h4>Dear customer, your bill.</h4>
     <table>
         <thead>
             <tr>
-                <th><h3>Randevu başlangıç zamanı</h3></th>
-                <th><h3>Randevu bitiş zamanı</h3></th>
-                <th><h3>Toplam tutar</h3> </th>
+                <th><h3>Appointment start time</h3></th>
+                <th><h3>Appointment end time</h3></th>
+                <th><h3>Total amount</h3> </th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td></h4>{{booking.start_time}}</h4></td>
                 <td></h4>{{booking.end_time}}</h4></td>
-                <td><h4>{{booking.total_price}}&#8378;</h4>
+                <td><h4>{{booking.total_price}}Pln</h4>
                     
                 </td>
             </tr>
         </tbody>
     </table>
+    <p>Thank you for booking an appointment with Us.</p> 
+ 
+    <p>To cancel the appointment please reply to the email.</p>
 </body>
 
 </html>

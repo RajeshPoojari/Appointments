@@ -9,11 +9,13 @@
 {% block app_content %}
 <style>
     .marginTop{
-        margin-top: 20px;
+        margin-top: 20px; 
+    <img src="{{ url_for('static', filename='css/images/background.jpg') }}" class="img-circle" alt="Cinque Terre" width="304" height="236">                                                                             
     }
 </style>
 <div class="alert alert-info" role="alert">
-        <h3 class="text-center">Randevu almak için formu doldurunuz</h3>
+        <h3 class="text-center">Welcome, please make an Appointment</h3>
+
 </div>
 <form action="" method="POST" role="form" class="form form-horizontal">
     <!-- main div -->
@@ -25,13 +27,13 @@
         <div class="col-md-2 ">
             <!-- client informations -->
             <div class="row">
-                {{wtf.form_field(form.fname, placeholder='Lütfen isminizi giriniz.')}}
+                {{wtf.form_field(form.fname, placeholder='first name.')}}
             </div>
             <div class="row">
-                {{wtf.form_field(form.lname, placeholder='Lütfen soy isminizi giriniz.')}}
+                {{wtf.form_field(form.lname, placeholder='last name.')}}
             </div>
             <div class="row">
-                {{wtf.form_field(form.phone, placeholder='Ör: 5554442211')}}
+                {{wtf.form_field(form.phone, placeholder='tel: 5554442211')}}
             </div>
             <div class="row">
                 {{wtf.form_field(form.email, placeholder='ornek@email.com')}}
@@ -41,7 +43,7 @@
         <div class="col-md-2 marginTop">
             <!-- DATE -->
             <div class="input-group">
-                <input required name="date" type="text" class="form-control" placeholder="Tarih seçiniz..." id="date">
+                <input required name="date" type="text" class="form-control" placeholder="select date..." id="date">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" id="calendar_button">
                         <span class="glyphicon glyphicon-calendar"></span>
@@ -53,7 +55,7 @@
         <div class="col-md-2 marginTop">
             <!-- TIME -->
             <div class="input-group">
-                <input required name="time" type="text" class="form-control" placeholder="Saat seçiniz..." id="time">
+                <input required name="time" type="text" class="form-control" placeholder="Select time..." id="time">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" id="time_button">
                         <span class="glyphicon glyphicon-time"></span>
@@ -66,12 +68,12 @@
             <div class="row">
                 <!-- Services -->
                 <table class="table">
-                    <tr><h3>Hizmetlerimiz</h3></tr>
+                    <tr><h3> Our Services</h3></tr>
                     {% if services %}
                     <tr>
                         {% for service in services %}
                         <th>
-                            <span>{{service.price}} TL </span>
+                            <span>{{service.price}} Pln </span>
                         </th>
                         {% endfor%}
                     </tr>
@@ -87,22 +89,22 @@
                     {% endif %}
                 </table>
             </div>
-            <div class="row">
-                <!-- Employees -->
+            <!--<div class="row">
+                 Employees 
                 <div class="form-group">
-                    <label class="control-label" for="employee">Personel Seç</label>
+                    <label class="control-label" for="employee">Select Staff</label>
                     <select id="employee" name="selected_person_id" class="selectpicker form-control">
                         {% for emp in employees %}
                             <option value="{{ emp.id }}">{{ emp.full_name() }}</option>
                         {% endfor %}
                     </select>
                 </div>
-            </div>
+            </div> -->
         </div>
-    </div>
+    </div> 
     <div class="row">
         <div class="col-md-3">
-            <div class="marginTop">
+            <div class="marginTop"> 
 
                 <!-- submit -->
                 {{wtf.form_field(form.submit, button_map={'submit':'primary'})}}
@@ -113,8 +115,8 @@
 </form>
 {% endblock %} {% block scripts %}
 <script>
-    // Specify locale as Turkey
-    jQuery.datetimepicker.setLocale('tr');
+    // Specify locale as english
+    jQuery.datetimepicker.setLocale('en');
     jQuery('#calendar_button').click(function () {
         jQuery('#date').datetimepicker('show'); //support hide,show and destroy command
     });
@@ -136,7 +138,7 @@
         timepicker: false,
         format: 'Y.m.d',
         minDate: 0,
-        disabledWeekDays: [0],
+        disabledWeekDays: [],
     });
     // click icon button
     jQuery('#time_button').click(function () {
@@ -147,7 +149,7 @@
     jQuery('#time').datetimepicker({
         datepicker: false,
         format: 'H.i',
-        minTime: '05:00',
-        maxTime: '16:00'
+        minTime: '10:00',
+        maxTime: '21:00'
     });
 </script> {% endblock%}

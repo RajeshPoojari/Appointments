@@ -11,7 +11,7 @@
       </button>
       <a class="navbar-brand" href="{{url_for('home.index')}}">
         <span class="glyphicon glyphicon-home"></span>
-        Anasayfa
+        Home page
       </a>
     </div>
 
@@ -52,21 +52,21 @@
             {% if current_user.is_admin %}
             <li>
               <a href="{{url_for('auth.register')}}">
-                <span class="glyphicon glyphicon-leaf"></span> Kullanıcı Ekle</a>
+                <span class="glyphicon glyphicon-leaf"></span> Add User</a>
             </li>
             <li>
                 <a href="{{url_for('auth.add_service')}}">
-                  <span class="glyphicon glyphicon-scissors"></span> Servis Ekle</a>
+                  <span class="glyphicon glyphicon-scissors"></span> Add Service</a>
               </li>
             {% endif %} 
             <li>
                 <a href="{{url_for('auth.logout')}}">
-                  <span class="glyphicon glyphicon-log-out"></span> Çıkış</a>
+                  <span class="glyphicon glyphicon-log-out"></span> Exit</a>
               </li>
         {% else %}
         <li>
           <a href="{{url_for('auth.login')}}">
-            <span class="glyphicon glyphicon-log-in"></span> Giriş yap</a>
+            <span class="glyphicon glyphicon-log-in"></span> Sign in</a>
         </li>
 
         {% endif %}

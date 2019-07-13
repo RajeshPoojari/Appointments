@@ -17,7 +17,7 @@ from myapp import db
 @login_required
 def dashboard():
     bookings = Booking.query.filter(Booking.activated == True).all()
-    return render_template('auth/dashboard.html', title="Yönetici Anasayfa", bookings=bookings)
+    return render_template('auth/dashboard.html', title="Home", bookings=bookings)
 
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -26,12 +26,12 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Kullanıcı adı veya parola hatalı', 'danger')
+            flash('Username or password incorrect', 'danger')
             return redirect(url_for('auth.login'))
         login_user(user)
-        flash("Sisteme giriş yaptınız.")
+        flash("You are logged in.")
         return redirect(url_for('auth.dashboard'))
-    return render_template('auth/login.html', title="Giriş yap", form=form)
+    return render_template('auth/login.html', title="Sign in", form=form)
 
 
 @bp.route('/logout')
@@ -56,9 +56,9 @@ def register():
             user.set_password(form.password.data)
             db.session.add(user)
             db.session.commit()
-            flash("Yeni kullanıcı başarıyla kaydedildi", "success")
+            flash("New user successfully registered", "success")
             return redirect(url_for('auth.register'))
-        return render_template('auth/register.html', title='Kaydol', form=form)
+        return render_template('auth/register.html', title='Register', form=form)
     else:
         return render_template('errors/403.html'), 403
 
@@ -73,10 +73,10 @@ def add_service():
             service = Service(name=form.name.data, price=form.price.data)
             db.session.add(service)
             db.session.commit()
-            flash('Servis eklendi', 'success')
+            flash('Service added', 'success')
             return redirect(url_for('auth.add_service'))
         return render_template('auth/service_form.html',
-                               title='Servis Ekle',
+                               title='Add Service',
                                form=form, services=services)
     else:
         return render_template('errors/403.html'), 403

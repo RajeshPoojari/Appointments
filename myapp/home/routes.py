@@ -5,7 +5,7 @@ from flask import render_template, flash, redirect, url_for, request
 # from werkzeug.urls import url_parse
 import datetime
 # internal
-from myapp import db, app
+from myapp import db, app 
 from myapp.home import bp
 from myapp.home.forms import BookingForm
 from myapp.home.models import Service, service_provided, service_booked, Client, Booking
@@ -13,7 +13,6 @@ from myapp.utils import send_confirmation_token, convert_to_datetime, send_bill_
 from myapp.utils import generate_token, verify_token
 from myapp.auth.models import User
 from myapp.home.models import Client
-
 
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
@@ -34,24 +33,23 @@ def index():
         total_price = Service.total_price_of_selected_services(
             selected_services)
 
-        employee_id = request.form.get('selected_person_id')
-        employee = User.query.get(employee_id)
+        
         # Check if client is already saved
         client = Client.get_client_by_email(email)
         if client is None:
             client = Client(fname=fname, lname=lname, phone=phone, email=email)
             db.session.add(client)
             booking = Booking(start_time=start_time, end_time=end_time,
-                              total_price=total_price, client=client, employee=employee)
+                              total_price=total_price, client=client)
             booking.fill_booked_services(selected_services)
             db.session.add(booking)
             db.session.commit()
             # SEND EMAIL CONFIRMATION
             send_confirmation_token(client)
-            flash("Email doğrulamak için mail kutunuzu kontrol ediniz", "warning")
+            flash("Check your email to verify your email", "warning")
         else:
             booking = Booking(start_time=start_time, end_time=end_time,
-                              total_price=total_price, client=client, employee=employee)
+                              total_price=total_price, client=client)
             booking.fill_booked_services(selected_services)
             # Booking Activate
             booking.activated = True
@@ -59,9 +57,9 @@ def index():
             db.session.commit()
             # Send bill email
             send_bill_mail(client, booking)
-            flash("Email kutunuzu kontrol ediniz", "warning")
+            flash("Check your email", "warning")
         return redirect(url_for('home.index'))
-    return render_template('home/index.html', title="Anasayfa", form=form, services=services, employees=employees)
+    return render_template('home/index.html', title="Home page", form=form, services=services)
 
 
 @bp.route('/confirm_email/<token>', methods=['GET', 'POST'])
@@ -69,7 +67,7 @@ def confirm_email(token):
     # check token if it belongs to the correct email address
     email = verify_token(token)
     if not email:
-        flash('Email doğrulama isteği hatalı', 'danger')
+        flash('Email verification request incorrect', 'danger')
         return redirect(url_for('home.index'))
     client = Client.query.filter_by(email=email).first_or_404()
     if client.email_confirmed == False:
@@ -77,17 +75,17 @@ def confirm_email(token):
         booking = Booking.query.filter_by(client_id=client.id).first()
         booking.activated = True
         db.session.commit()
-        flash("Email adresinizi doğruladınız, randevunuz kaydedildi", 'success')
+        flash("You have verified your email address, your appointment has been saved", 'success')
         send_bill_mail(client, booking)
     return redirect(url_for('home.index'))
 
 
 @bp.route('/about_us')
 def about_us():
-    return render_template('home/about_us.html', title="Hakkımızda")
+    return render_template('home/about_us.html', title="About Us")
 
 
 @bp.route('/contact_us')
 def contact_us():
     print(app.config['ADMINS'])
-    return render_template('home/contact_us.html', title="İletişim")
+    return render_template('home/contact_us.html', title="Contact Us")

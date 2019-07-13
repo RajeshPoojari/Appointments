@@ -1,4 +1,6 @@
-Değerli müşterimiz faturanız.
-Randevu başlangıç zamanı: {{booking.start_time}}
-Randevu bitiş zamanı: {{booking.end_time}}
-Tutar U+020BA : {{booking.total_price}}
+Dear customer invoice.
+Appointment start time: {{booking.start_time}}
+Appointment end time: {{booking.end_time}}
+Amount U+020BA : {{booking.total_price}}Pln
+Thank you for booking an appointment with Us.
+To cancel the appointment please reply to the email.
